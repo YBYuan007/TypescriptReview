@@ -37,7 +37,7 @@ export default class TodoInterface extends Model <TodoAttributes>{}
 TodoInterface.init({
 
   id: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull: false 
   }, 
