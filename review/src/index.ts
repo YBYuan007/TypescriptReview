@@ -93,22 +93,119 @@ const userInterface: UserInterface = {
 
 // userInterface.id = 8;  // cannot change as it is a read only property 
 
-
 // objects can be used with primitives and it can be used with unions 
 type Point = number | string 
 const p1: Point = 5 
 
 // wrong: interface Point2 = number | string 
 
+// use interface in the function 
+
+interface mathFunc {
+  (x: number, 
+  y: number) : number 
+}
+
+const add: mathFunc = (x:number, y: number): number => x + y;  // create an arrow function 
+const sub: mathFunc = (x:number, y: number): number => x - y; 
+
+
+// wrong: const add: mathFunc = (x:number, y: string): number => x + y 
 
 
 
-// function +  interface 
 // classes && classes + interfaces 
-// data modifiers 
-// implement interface in class 
+
+//name has not initializer and is not assigned in the constructor; 
+// constructor is a method, so classes can have properties, 
+// they can also have methods which are just functions within the class 
+// constructor will run whenever the class is or whenever an object is instantiated from that class 
+class Person {
+  id: number
+  name: string 
+
+  constructor() {
+    console.log(123)
+  }
+}
+
+const brad = new Person()
+const mike = new Person() 
+
+// ========================================================
+class Person1 {
+  id: number,
+  name: string 
+
+  constructor(id: number, name: string) {
+    this.id = id,
+    this.name = name 
+  }
+
+  register() { // method 
+    return `${this.name} is now registered`
+  }
+}
+
+const frank = new Person1(5, 'frank'); 
+frank.id = 8; 
+const tina = new Person1(6,  'tina'); 
+console.log(frank)
+console.log(tina.register())
+
+// property is private, or public , or protected 
+// ========================================================
+
+interface PersonInterface {
+  id: number
+  name: string 
+  register(): string 
+}
+
+class Person3 implements PersonInterface {
+  id: number 
+  name: string 
+
+  constructor (id: number, name: string) {
+    this.id = id 
+    this.name = name 
+  }
+
+  register () {
+    return `aaa`
+    // return 1
+  }
+
+}
+
+
+
 // extending classes(subclasses) 
-//generics 
+
+class Employee extends Person1 {
+  position: string 
+
+  constructor(id: number, name: string, position: string) {
+    super(id, name)
+    this.position =  position 
+  }
+}
+
+const emp = new Employee(3,'dav', 'CEO');
+console.log(emp.register()) 
+
+
+//generics - re-usable components , placeholders 
+function getArray<T>(items: T[]): T[] {
+  return new Array().concat(items)
+}
+
+let numArr = getArray<number>([1,2,3,4])
+let strArr = getArray<string>(['a','b','c','d'])
+
+// numArr.push(strArr);
+numArr.push(1);
+
 // typescript with react 
 
 

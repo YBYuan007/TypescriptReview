@@ -56,11 +56,63 @@ function addNum(x, y) {
     return x + y;
 }
 console.log(addNum(5, 6));
-//interfaces 
-// function interface 
-// classes 
-// data modifiers 
-// implement interface in class 
+// void 
+function log(message) {
+    console.log(message);
+}
+const userInterface = {
+    id: 5,
+    name: 'john'
+};
+const p1 = 5;
+const add = (x, y) => x + y; // create an arrow function 
+const sub = (x, y) => x - y;
+// wrong: const add: mathFunc = (x:number, y: string): number => x + y 
+// classes && classes + interfaces 
+//name has not initializer and is not assigned in the constructor; 
+// constructor is a method, so classes can have properties, 
+// they can also have methods which are just functions within the class 
+// constructor will run whenever the class is or whenever an object is instantiated from that class 
+class Person {
+    constructor() {
+        console.log(123);
+    }
+}
+const brad = new Person();
+const mike = new Person();
+// ========================================================
+class Person1 {
+    constructor(id, name) {
+        this.id = id,
+            this.name = name;
+    }
+    register() {
+        return `${this.name} is now registered`;
+    }
+}
+const frank = new Person1(5, 'frank');
+frank.id = 8;
+const tina = new Person1(6, 'tina');
+console.log(frank);
+console.log(tina.register());
+class Person3 {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+    register() {
+        return `aaa`;
+        // return 1
+    }
+}
 // extending classes(subclasses) 
-//generics 
+class Employee extends Person1 {
+    constructor(id, name, position) {
+        super(id, name);
+        this.position = position;
+    }
+}
+const emp = new Employee(3, 'dav', 'CEO');
+console.log(emp.register());
+//generics - re-usable components , placeholders 
 // typescript with react 
