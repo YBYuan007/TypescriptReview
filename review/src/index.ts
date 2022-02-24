@@ -74,7 +74,7 @@ function addNum(x: number, y: number):number {
 console.log(addNum(5,6));
 
 // void 
-function log(message: string| number) : void {
+function log(message: string| number) :void {
   console.log(message)
 }
 

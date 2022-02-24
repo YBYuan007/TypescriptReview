@@ -115,4 +115,11 @@ class Employee extends Person1 {
 const emp = new Employee(3, 'dav', 'CEO');
 console.log(emp.register());
 //generics - re-usable components , placeholders 
+function getArray(items) {
+    return new Array().concat(items);
+}
+let numArr = getArray([1, 2, 3, 4]);
+let strArr = getArray(['a', 'b', 'c', 'd']);
+// numArr.push(strArr);
+numArr.push(1);
 // typescript with react 
