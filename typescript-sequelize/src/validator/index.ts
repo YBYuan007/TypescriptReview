@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import { body, query } from "express-validator";
 
 class TodoValidator {
   checkCreateTodo() {
@@ -13,6 +13,13 @@ class TodoValidator {
         .isIn([0, false])
         .withMessage("it should be incomplete "),
     ];
+  }
+
+  checkReadTodo () {
+    return [
+      query("limit").notEmpty().withMessage("The query limit should not be empty")
+      .isInt({min:1, max:10}).withMessage("the limit should be integer and should be 1-10")
+    ]
   }
 }
 

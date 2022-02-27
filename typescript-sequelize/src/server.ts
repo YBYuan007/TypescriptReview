@@ -42,6 +42,27 @@ app.post(
 
 // read
 
+app.get(
+  "/read",
+  TodoValidator.checkReadTodo(),
+  Middleware.handleValidationError,
+  async (req: Request, res: Response) => {
+    const limit = req.query.limit as number | undefined;
+    try {
+      const records = await TodoInterface.findAll({limit: limit });
+      // console.log("find the middleware?", req.body) //undefined--> need middleware
+      // return res.send(createTodo);
+      return res.json({ records, msg: "find records" }); //The res.json() function sends a JSON response.
+    } catch (err) {
+      return res.json({
+        msg: " failed to find records",
+        status: 500,
+        route: "/read",
+      });
+    }
+  }
+);
+
 // update
 
 // delete
