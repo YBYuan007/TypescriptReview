@@ -40,7 +40,7 @@ app.post(
   }
 );
 
-// read
+// read with pagination 
 
 app.get(
   "/read",
@@ -62,6 +62,29 @@ app.get(
     }
   }
 );
+
+// read with id  
+
+app.get(
+  "/read/:id",
+  TodoValidator.findParam(),
+  Middleware.handleValidationError,
+  async (req: Request, res: Response) => {
+    const id = req.params.id; 
+    console.log("id is: ", id); 
+    try {
+      const record = await TodoInterface.findOne({where: {id: id } });
+      return res.json({ record, msg: "find this record" }); 
+    } catch (err) {
+      return res.json({
+        msg: " failed to find this record",
+        status: 500,
+        route: "/read/:id",
+      });
+    }
+  }
+);
+
 
 // update
 

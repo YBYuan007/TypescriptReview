@@ -1,10 +1,13 @@
-import { body, query } from "express-validator";
+import { body, query, param } from "express-validator";
 
 class TodoValidator {
   checkCreateTodo() {
     // create the function
     return [
-      body(["id"]).optional().isUUID(4).withMessage("it is not a valid uuid4 id"),
+      body(["id"])
+        .optional()
+        .isUUID(4)
+        .withMessage("it is not a valid uuid4 id"),
       body("title").notEmpty().withMessage("Must provide a title"),
       body("completed")
         .optional()
@@ -15,11 +18,24 @@ class TodoValidator {
     ];
   }
 
-  checkReadTodo () {
+  checkReadTodo() {
     return [
-      query("limit").notEmpty().withMessage("The query limit should not be empty")
-      .isInt({min:1, max:10}).withMessage("the limit should be integer and should be 1-10")
-    ]
+      query("limit")
+        .notEmpty()
+        .withMessage("The query limit should not be empty")
+        .isInt({ min: 1, max: 10 })
+        .withMessage("the limit should be integer and should be 1-10"),
+    ];
+  }
+
+  findParam() {
+    return [
+      param("id")
+        .notEmpty()
+        .withMessage("the id should not be empty")
+        .isUUID(4)
+        .withMessage("The id is not a valid uuid v4"),
+    ];
   }
 }
 
