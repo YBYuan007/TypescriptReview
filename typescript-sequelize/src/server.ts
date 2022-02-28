@@ -116,6 +116,29 @@ app.put(
 
 // delete
 
+app.delete(
+  "/delete/:id",
+  TodoValidator.findParam(),
+  Middleware.handleValidationError,
+  async (req: Request, res: Response) => {
+    const id = req.params.id;
+    console.log("id is: ", id);
+    try {
+      const record = await TodoInterface.destroy({
+        where: { id: id },
+      });
+      return res.json({  msg: "deleted this record" });
+    } catch (err) {
+      return res.json({
+        msg: " failed to find this record",
+        status: 500,
+        route: "/delete/:id",
+      });
+    }
+  }
+);
+
+
 app.listen(port, () => {
   console.log("who is listening?" + port);
 });
